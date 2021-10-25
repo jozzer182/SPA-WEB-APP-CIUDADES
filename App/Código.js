@@ -10,7 +10,7 @@ function doGet() {
 
 
 function traerDatos(){
-  const id = '1vAlq14TpTg-Zx4c--d-5rb-fh_ITT_OjlYjrIZL-ZV0';
+  const id = '1RchrsZtUMoo1_SUII-ytyy3xpfzfxxGUMceIJsc8UUQ';
   const data = SpreadsheetApp.openById(id).getSheetByName('datos').getDataRange().getValues();
   const headings = data[0];
   const dataBody = data.slice(1);
@@ -31,7 +31,7 @@ function traerDatos(){
 }
 
 function addSheet(vals){
-  const id = '1vAlq14TpTg-Zx4c--d-5rb-fh_ITT_OjlYjrIZL-ZV0';
+  const id = '1RchrsZtUMoo1_SUII-ytyy3xpfzfxxGUMceIJsc8UUQ';
   const sheet = SpreadsheetApp.openById(id).getSheetByName('datos');
   const headings = sheet.getDataRange().getValues()[0];
   
@@ -45,4 +45,32 @@ function addSheet(vals){
   });
 
   return vals;
+}
+
+function deleteRow(rowid){
+  const id = '1RchrsZtUMoo1_SUII-ytyy3xpfzfxxGUMceIJsc8UUQ';
+  const sheet = SpreadsheetApp.openById(id).getSheetByName('datos');
+  const data = SpreadsheetApp.openById(id).getSheetByName('datos').getDataRange().getValues();
+  const headings = data[0];
+  const dataBody = data.slice(1);
+
+  const arrayObj = [];
+
+  //recorremos cada elemento de questions
+  dataBody.forEach((el)=>{
+    let obj = {};
+
+    headings.forEach((header, index)=>{
+      obj[header.toLowerCase()] = el[index];
+    })
+    arrayObj.push(obj);
+  })
+
+  arrayObj.forEach((a,i)=>{
+    if(a.aid === rowid){
+      sheet.deleteRow(i+2)
+    }
+  })
+
+  return arrayObj;
 }
