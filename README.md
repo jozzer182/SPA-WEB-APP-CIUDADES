@@ -8,7 +8,7 @@
 
 `clasp push`
 
-`npm install –save bootstrap`
+`npm install -–save bootstrap`
 
 `import 'bootstrap/dist/css/bootstrap.min.css';`
 
